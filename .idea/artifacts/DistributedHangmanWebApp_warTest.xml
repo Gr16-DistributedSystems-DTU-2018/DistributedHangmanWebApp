@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DistributedHangmanWebApp:warTest">
+    <output-path>$PROJECT_DIR$/out/artifacts/DistributedHangmanWebApp_warTest</output-path>
+    <root id="archive" name="DistributedHangmanWebApp_warTest.war">
+      <element id="artifact" artifact-name="DistributedHangmanWebApp:war exploded" />
+    </root>
+  </artifact>
+</component>
