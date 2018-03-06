@@ -15,6 +15,7 @@ import java.rmi.RemoteException;
 public final class GameLogicService implements IGameLogicService {
 
     private IGameLogic logic;
+    private final String ERROR = "Error occurred!";
 
     public GameLogicService() throws Exception {
         logic = (IGameLogic) Naming.lookup(Utils.RMI_STUB_URL_REMOTE_LOGIC_JAVABOG);
@@ -28,7 +29,7 @@ public final class GameLogicService implements IGameLogicService {
             boolean result = logic.guess(ch);
             return Response.ok().entity(result).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -40,7 +41,7 @@ public final class GameLogicService implements IGameLogicService {
             logic.resetScore();
             return Response.ok().entity("Score reset successfully.").build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -52,7 +53,7 @@ public final class GameLogicService implements IGameLogicService {
             logic.resetGame();
             return Response.ok().entity("Game reset successfully.").build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -64,7 +65,7 @@ public final class GameLogicService implements IGameLogicService {
             logic.startGameTimer();
             return Response.ok().entity("Timer started successfully.").build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -76,7 +77,7 @@ public final class GameLogicService implements IGameLogicService {
             logic.stopGameTimer();
             return Response.ok().entity("Timer stopped successfully.").build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -88,7 +89,7 @@ public final class GameLogicService implements IGameLogicService {
             int time = logic.getGameTimeElapsed();
             return Response.ok().entity(time).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -100,7 +101,7 @@ public final class GameLogicService implements IGameLogicService {
             String chars = logic.getGuessedChars();
             return Response.ok().entity(chars).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -112,7 +113,7 @@ public final class GameLogicService implements IGameLogicService {
             String word = logic.getCurrentGuessedWord();
             return Response.ok().entity(word).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -124,7 +125,7 @@ public final class GameLogicService implements IGameLogicService {
             int life = logic.getCurrentLife();
             return Response.ok().entity(life).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -136,7 +137,7 @@ public final class GameLogicService implements IGameLogicService {
             int score = logic.getCurrentScore();
             return Response.ok().entity(score).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -148,7 +149,7 @@ public final class GameLogicService implements IGameLogicService {
             boolean isCharGuessed = logic.isCharGuessed(ch);
             return Response.ok().entity(isCharGuessed).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -160,7 +161,7 @@ public final class GameLogicService implements IGameLogicService {
             boolean isGameWon = logic.isGameWon();
             return Response.ok().entity(isGameWon).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -172,7 +173,7 @@ public final class GameLogicService implements IGameLogicService {
             boolean isGameLost = logic.isGameLost();
             return Response.ok().entity(isGameLost).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -184,7 +185,7 @@ public final class GameLogicService implements IGameLogicService {
             boolean isHighscore = logic.isHighScore();
             return Response.ok().entity(isHighscore).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 

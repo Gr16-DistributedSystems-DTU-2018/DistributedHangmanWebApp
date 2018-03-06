@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 public final class UserAuthenticationService implements IUserAuthenticationService {
 
     private IGameLogic logic;
+    private final String ERROR = "Error occurred!";
 
     public UserAuthenticationService() throws Exception {
         logic = (IGameLogic) Naming.lookup(Utils.RMI_STUB_URL_REMOTE_LOGIC_JAVABOG);
@@ -32,7 +33,7 @@ public final class UserAuthenticationService implements IUserAuthenticationServi
             logic.logIn(username, password);
             return Response.ok().entity(username + " logged in successfully.").build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -44,7 +45,7 @@ public final class UserAuthenticationService implements IUserAuthenticationServi
             logic.logOut();
             return Response.ok().entity("Logged out successfully.").build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -61,7 +62,7 @@ public final class UserAuthenticationService implements IUserAuthenticationServi
             logic.setUserField(username, password, userFieldKey, value);
             return Response.ok().entity("Set user field: " + userFieldKey + ":" + value).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -77,7 +78,7 @@ public final class UserAuthenticationService implements IUserAuthenticationServi
             String userField = logic.getUserField(username, password, userFieldKey);
             return Response.ok().entity(userField).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -93,7 +94,7 @@ public final class UserAuthenticationService implements IUserAuthenticationServi
             else
                 return Response.ok().entity("User is null!").build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
@@ -105,7 +106,7 @@ public final class UserAuthenticationService implements IUserAuthenticationServi
             boolean isLoggedIn = logic.isLoggedIn();
             return Response.ok().entity(isLoggedIn).build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(e.getMessage()).build();
+            return Response.serverError().entity(ERROR).build();
         }
     }
 
