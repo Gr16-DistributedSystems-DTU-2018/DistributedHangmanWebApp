@@ -1,17 +1,26 @@
 .btn-group button {
+    display: inline;
     background-color: #4CAF50; /* Green background */
-    border: 1px solid black; /* Green border */
+    border: 1px solid black; /* Black border */
     color: white; /* White text */
     padding: 24px 30px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
     float: left; /* Float the buttons side by side */
 }
 
+
+
 /* Clear floats (clearfix hack) */
 .btn-group:after {
     content: "";
     clear: both;
     display: table;
+}
+
+.divider{
+width: 5px; /* adds spacing between buttons*/
+height: auto;
+display: inline-block;
 }
 
 .btn-group button:not(:last-child) {
@@ -29,4 +38,9 @@ img.avatar{
 }
 .container{
     text-align: center;
+}
+
+.table{
+    margin-left: auto;
+    margin-right: auto;
 }
