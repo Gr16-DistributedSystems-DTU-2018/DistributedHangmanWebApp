@@ -24,16 +24,17 @@ public final class UserAuthenticationService implements IUserAuthenticationServi
 
     @POST
     @Path("/login")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
     public Response logIn(
             @QueryParam("username") String username,
             @QueryParam("password") String password) throws RESTException {
         try {
             logic.logIn(username, password);
+            System.out.println();
             return Response.ok().entity(username + " logged in successfully.").build();
         } catch (RemoteException e) {
-            return Response.serverError().entity(ERROR).build();
+            return Response.ok().entity(ERROR).build();
         }
     }
 

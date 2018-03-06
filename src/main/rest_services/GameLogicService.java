@@ -82,7 +82,7 @@ public final class GameLogicService implements IGameLogicService {
     }
 
     @GET
-    @Path("/reset_score")
+    @Path("/get_time")
     @Produces(MediaType.TEXT_PLAIN)
     public Response getGameTimeElapsed() throws RESTException {
         try {
