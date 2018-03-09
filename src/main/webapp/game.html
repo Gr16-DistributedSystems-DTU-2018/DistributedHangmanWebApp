@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/game.css">
     <title>Game | DistributedHangman</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.js"></script>
+    <script src="assets/js/game.js"></script>
     <link rel="apple-touch-icon" sizes="57x57" href="assets/img/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/img/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-icon-72x72.png">
@@ -23,55 +26,60 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 
-
 <body>
 <div class="imgcontainer">
-    <img src="assets/img/galge.png" alt="Avatar" class="avatar">
-    <center>
-        <p></p>
-        <text> Guess the word:</text>
-        <p> X X X X X X </p>
-        <text> UserName</text>
-        <p> X X X X X X </p>
-        <text> Score:</text>
-        <p> X X X X X X </p>
-        <text> Life:</text>
-        <p> X X X X X X </p>
-    </center>
+    <div align="center">
+
+        <p><b>User</b></p>
+        <p>s000000 Salalsdlad</p>
+
+        <img src="assets/img/galge.png" alt="Avatar" class="avatar">
+
+        <p><b>Word</b></p>
+        <p>xxxxxxxxxxxxxxxx</p>
+        <p><b>Used Characters</b></p>
+        <p>xxxxxxxxxxxxxxxx</p>
+        <p><b>Score</b></p>
+        <p>xxxxxxxxxxxxxxxx</p>
+        <p><b>Life</b></p>
+        <p>xxxxxxxxxxxxxxxx</p>
+
+    </div>
+
 </div>
 
 <div>
     <center>
-        <div class="btn-group" style="width: 50%">
-            <button style="width: 17%" type="button" class="btn btn-primary">A</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">B</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">C</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">D</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">E</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">F</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">G</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">H</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">I</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">J</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">K</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">L</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">M</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">N</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">O</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">P</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">Q</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">R</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">S</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">T</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">U</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">V</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">W</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">X</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">Y</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">Z</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">Æ</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">Ø</button>
-            <button style="width: 17%" type="button" class="btn btn-primary">Å</button>
+        <div align="center" class="btn-group" style="width: 50%">
+            <button id="btn_a" style="width: 17%" type="button" class="btn btn-primary">A</button>
+            <button id="btn_b" style="width: 17%" type="button" class="btn btn-primary">B</button>
+            <button id="btn_c" style="width: 17%" type="button" class="btn btn-primary">C</button>
+            <button id="btn_d" style="width: 17%" type="button" class="btn btn-primary">D</button>
+            <button id="btn_e" style="width: 17%" type="button" class="btn btn-primary">E</button>
+            <button id="btn_f" style="width: 17%" type="button" class="btn btn-primary">F</button>
+            <button id="btn_g" style="width: 17%" type="button" class="btn btn-primary">G</button>
+            <button id="btn_h" style="width: 17%" type="button" class="btn btn-primary">H</button>
+            <button id="btn_i" style="width: 17%" type="button" class="btn btn-primary">I</button>
+            <button id="btn_j" style="width: 17%" type="button" class="btn btn-primary">J</button>
+            <button id="btn_k" style="width: 17%" type="button" class="btn btn-primary">K</button>
+            <button id="btn_l" style="width: 17%" type="button" class="btn btn-primary">L</button>
+            <button id="btn_m" style="width: 17%" type="button" class="btn btn-primary">M</button>
+            <button id="btn_n" style="width: 17%" type="button" class="btn btn-primary">N</button>
+            <button id="btn_o" style="width: 17%" type="button" class="btn btn-primary">O</button>
+            <button id="btn_p" style="width: 17%" type="button" class="btn btn-primary">P</button>
+            <button id="btn_q" style="width: 17%" type="button" class="btn btn-primary">Q</button>
+            <button id="btn_r" style="width: 17%" type="button" class="btn btn-primary">R</button>
+            <button id="btn_s" style="width: 17%" type="button" class="btn btn-primary">S</button>
+            <button id="btn_t" style="width: 17%" type="button" class="btn btn-primary">T</button>
+            <button id="btn_u" style="width: 17%" type="button" class="btn btn-primary">U</button>
+            <button id="btn_v" style="width: 17%" type="button" class="btn btn-primary">V</button>
+            <button id="btn_w" style="width: 17%" type="button" class="btn btn-primary">W</button>
+            <button id="btn_x" style="width: 17%" type="button" class="btn btn-primary">X</button>
+            <button id="btn_y" style="width: 17%" type="button" class="btn btn-primary">Y</button>
+            <button id="btn_z" style="width: 17%" type="button" class="btn btn-primary">Z</button>
+            <button id="btn_ae" style="width: 17%" type="button" class="btn btn-primary">Æ</button>
+            <button id="btn_oe" style="width: 17%" type="button" class="btn btn-primary">Ø</button>
+            <button id="btn_aa" style="width: 17%" type="button" class="btn btn-primary">Å</button>
         </div>
     </center>
 </div>

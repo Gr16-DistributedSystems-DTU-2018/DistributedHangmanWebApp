@@ -31,7 +31,6 @@ public final class UserAuthenticationService implements IUserAuthenticationServi
             @QueryParam("password") String password) throws RESTException {
         try {
             logic.logIn(username, password);
-            System.out.println();
             return Response.ok().entity(username + " logged in successfully.").build();
         } catch (RemoteException e) {
             return Response.ok().entity(ERROR).build();
