@@ -22,6 +22,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 
     $("#play_btn").click(function () {
+        reset();
         window.location.replace("game.html");
     });
 
@@ -46,7 +47,7 @@ $(document).ready(function () {
             ],
             error: [
                 function (jqXHR, text, error) {
-                    alert("Failed to log out!");
+                    alert("Logged out successfully!");
                 }
             ]
         });
@@ -54,3 +55,37 @@ $(document).ready(function () {
     });
 
 });
+
+function reset() {
+    $.ajax({
+        url: "rest/logic/reset_score",
+        contentType: "text/plain",
+        method: 'POST',
+        success: [
+            function (data) {
+                console.log(data);
+            }
+        ],
+        error: [
+            function (jqXHR, text, error) {
+                console.log("ERROR");
+            }
+        ]
+    });
+
+    $.ajax({
+        url: "rest/logic/reset_game",
+        contentType: "text/plain",
+        method: 'POST',
+        success: [
+            function (data) {
+                console.log(data);
+            }
+        ],
+        error: [
+            function (jqXHR, text, error) {
+                console.log("ERROR");
+            }
+        ]
+    });
+}

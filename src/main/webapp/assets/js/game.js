@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    reset();
-
     $.ajax({
         url: "rest/auth/get_current_user",
         contentType: "application/json",
@@ -333,7 +331,6 @@ function updateData() {
             }
         ]
     });
-
 }
 
 function guess(char) {
