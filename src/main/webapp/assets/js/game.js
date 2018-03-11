@@ -195,6 +195,10 @@ $(document).ready(function () {
         updateData();
     });
 
+    $("#back_btn").click(function () {
+        window.location.replace("menu.html");
+    });
+
 });
 
 function updateData() {

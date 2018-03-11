@@ -28,3 +28,9 @@ $(document).ready(function () {
     });
 
 });
+
+$(document).ready(function () {
+    $("#back_btn").click(function () {
+        window.location.replace("menu.html");
+    });
+});

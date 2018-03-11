@@ -33,4 +33,24 @@ $(document).ready(function () {
         window.location.replace("about.html");
     });
 
+    $("#logout_btn").click(function () {
+        $.ajax({
+            url: "rest/auth/logout",
+            method: 'POST',
+            contentType: 'text/plain',
+            success: [
+                function (data) {
+                    console.log(data);
+                    alert("Logged out successfully!")
+                }
+            ],
+            error: [
+                function (jqXHR, text, error) {
+                    alert("Failed to log out!");
+                }
+            ]
+        });
+        window.location.replace("index.html");
+    });
+
 });
