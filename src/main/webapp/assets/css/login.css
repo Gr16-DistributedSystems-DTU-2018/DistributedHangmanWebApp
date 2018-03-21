@@ -2,10 +2,12 @@
 form {
     border: 3px solid #f1f1f1;
     width: 650px;
-    height: 500px;
+    height: 490px;
     margin: auto;
     position: relative;
     top: 50%;
+    background: #3f51b5;
+    border-radius: 25px;
 }
 
 /* Full-width inputs */
@@ -20,13 +22,14 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-    background-color: #4CAF50;
+    background-color: #007dc1;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 70%;
+    border-radius: 10px;
 }
 
 /* Add a hover effect for buttons */
@@ -35,10 +38,11 @@ button:hover {
 }
 
 /* Extra style for the cancel button (red) */
-.cancelbtn {
-    width: auto;
+#forgot_pass_btn {
     padding: 10px 18px;
     background-color: #f44336;
+    width: 50%;
+    alignment: center;
 }
 
 /* Center the avatar image inside this container */
@@ -74,4 +78,8 @@ span.psw {
     .cancelbtn {
         width: 100%;
     }
+}
+
+label {
+    color: #f1f1f1;
 }
