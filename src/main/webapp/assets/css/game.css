@@ -15,10 +15,10 @@
     display: table;
 }
 
-.divider{
-width: 5px; /* adds spacing between buttons*/
-height: auto;
-display: inline-block;
+.divider {
+    width: 5px; /* adds spacing between buttons*/
+    height: auto;
+    display: inline-block;
 }
 
 .btn-group button:not(:last-child) {
@@ -29,16 +29,18 @@ display: inline-block;
 .btn-group button:hover {
     background-color: #3e8e41;
 }
-img.avatar{
+
+img.avatar {
     display: block;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
 }
-.container{
+
+.container {
     text-align: center;
 }
 
-.table{
+.table {
     margin-left: auto;
     margin-right: auto;
 }

@@ -12,6 +12,7 @@ h1 {
 
 body {
     font-family: 'coiny', Fallback, sans-serif;
+    background: rgba(87, 135, 193, 0.78);
 }
 
 /* Bordered form */
