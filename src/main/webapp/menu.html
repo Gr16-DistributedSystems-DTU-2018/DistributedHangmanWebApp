@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Menu | DistributedHangman</title>
     <link rel="stylesheet" href="assets/css/menu.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.js"></script>
     <script src="assets/js/menu.js"></script>
@@ -27,17 +28,20 @@
 </head>
 <body>
 <div id="border_container">
+    <h1>Distributed Hangman</h1>
     <div class="imgcontainer">
-        <img id="welcome_img" src="assets/img/welcome_image.png" alt="Avatar" class="avatar">
+        <img id="welcome_img" src="assets/img/welcome_image.png" alt="Avatar" class="avatar animated bounceIn">
     </div>
-    <h2 id="welcome_header" align="center" style="color: #f1f1f1">"Welcome Unknown User!"</h2>
-    <button id="play_btn" class="button" style="width:100%">Play</button>
-    <button id="lobby_btn" class="button" style="width:100%">Lobby</button>
-    <button id="highscore_btn" class="button" style="width:100%">High Scores</button>
-    <button id="send_email_btn" class="button" style="width:100%">Send Email</button>
-    <button id="change_pass_btn" class="button" style="width:100%">Change Password</button>
-    <button id="about_btn" class="button" style="width:100%">User Information</button>
-    <button id="logout_btn" class="button" style="width:100%">Log Out</button>
+    <div style="text-align: center">
+        <h2 id="welcome_header" align="center" style="color: #f1f1f1">Welcome!</h2>
+        <button id="play_btn" class="button">Play</button>
+        <button id="lobby_btn" class="button">Lobby</button>
+        <button id="highscore_btn" class="button">High Scores</button>
+        <button id="send_email_btn" class="button">Send Email</button>
+        <button id="change_pass_btn" class="button">Change Password</button>
+        <button id="about_btn" class="button">User Information</button>
+        <button id="logout_btn" class="button">Log Out</button>
+    </div>
 </div>
 </body>
 </html>

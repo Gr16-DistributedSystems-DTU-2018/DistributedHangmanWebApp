@@ -22,8 +22,15 @@ $(document).ready(function () {
                         console.log(data);
                         window.location.replace("menu.html");
                     } else {
-                        alert("Failed log in: " + username + ":" + password);
-                        console.log("Failed log in: " + username + ":" + password);
+                        var usernameEle = $("#username_fld");
+                        usernameEle.removeClass();
+                        usernameEle = reset(usernameEle);
+                        usernameEle.addClass("animated shake");
+
+                        var passwordEle = $("#password_fld");
+                        passwordEle.removeClass();
+                        passwordEle = reset(passwordEle);
+                        passwordEle.addClass("animated shake");
                     }
                 }
             ],
@@ -37,3 +44,10 @@ $(document).ready(function () {
     });
 
 });
+
+function reset($elem) {
+    $elem.before($elem.clone(true));
+    var $newElem = $elem.prev();
+    $elem.remove();
+    return $newElem;
+}
