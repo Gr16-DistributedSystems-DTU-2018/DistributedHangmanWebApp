@@ -45,6 +45,19 @@ $(document).ready(function () {
 
 });
 
+$(document).ready(function () {
+    $("#forgot_pass_btn").click(function () {
+        var username = $("#username_fld").val();
+
+        if (username.size < 5 || username.size > 7) {
+            alert("Please type a valid username so I can reset your password.")
+        } else {
+
+        }
+
+    });
+});
+
 function reset($elem) {
     $elem.before($elem.clone(true));
     var $newElem = $elem.prev();

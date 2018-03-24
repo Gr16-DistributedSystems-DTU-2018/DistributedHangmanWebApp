@@ -18,6 +18,12 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $("#back_btn").click(function () {
+        window.location.replace("menu.html");
+    });
+});
+
+$(document).ready(function () {
 
     updateData();
 
@@ -35,7 +41,11 @@ $(document).ready(function () {
                         location.reload();
                         guess('a');
                         updateData();
-                        $("#btn_a").addClass("animated bounceOut");
+                        var btn = $("#btn_a");
+                        btn.removeClass();
+                        btn = reset(btn);
+                        addBoucneOut(btn);
+                        btn.addClass("btn btn-primary")
                     } else {
                         alert('A is already guessed.')
                     }
@@ -1012,4 +1022,15 @@ function isCharGuessed(char) {
         ]
     });
 
+}
+
+function addBoucneOut(button) {
+    $(button).addClass("animated bounceOut")
+}
+
+function reset($elem) {
+    $elem.before($elem.clone(true));
+    var $newElem = $elem.prev();
+    $elem.remove();
+    return $newElem;
 }

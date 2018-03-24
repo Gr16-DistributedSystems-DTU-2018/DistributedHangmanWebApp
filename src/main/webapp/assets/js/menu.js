@@ -42,12 +42,10 @@ $(document).ready(function () {
             success: [
                 function (data) {
                     console.log(data);
-                    alert("Logged out successfully!")
                 }
             ],
             error: [
                 function (jqXHR, text, error) {
-                    alert("Logged out successfully!");
                 }
             ]
         });

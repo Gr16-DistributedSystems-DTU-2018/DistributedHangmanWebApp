@@ -8,15 +8,25 @@
     font-family: 'coiny', Fallback, sans-serif;
     display: inline;
     background-color: #007dc1;
-    font-size: 20px;
+    font-size: 18px;
     color: white; /* White text */
     margin: 10px 10px 10px 10px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
     float: left; /* Float the buttons side by side */
     width: 7%;
-    height: 10%;
+    height: 5%;
     border: none;
     border-radius: 100%;
+}
+
+#border_container {
+    width: 810px;
+    height: 700px;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    background: #3f51b5;
+    border-radius: 25px;
 }
 
 /* Add a hover effect for buttons */
@@ -41,7 +51,32 @@
     border-right: none; /* Prevent double borders */
 }
 
+table {
+    color: white;
+    font-family: 'coiny', Fallback, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    padding: 20px;
+}
+
+td, th {
+    color: white;
+    font-family: 'coiny', Fallback, sans-serif;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    color: white;
+    font-family: 'coiny', Fallback, sans-serif;
+}
+
+tr {
+    font-size: 16px;
+}
+
 img.avatar {
+    padding-top: 20px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -49,6 +84,16 @@ img.avatar {
 
 .container {
     text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'coiny', Fallback, sans-serif;
+    color: white;
+}
+
+body {
+    font-family: 'coiny', Fallback, sans-serif;
+    background: rgba(87, 135, 193, 0.78);
 }
 
 .table {
@@ -64,4 +109,21 @@ button {
     border: none;
     cursor: pointer;
     width: 100%;
+}
+
+#back_btn {
+    font-family: 'coiny', Fallback, sans-serif;
+    margin: 20px 0;
+    width: 50%;
+    background: #f44336;
+    font-size: small;
+    border-radius: 10px;
+}
+
+button.hover {
+    opacity: 0.7;
+}
+
+#back_btn.hover {
+    opacity: 0.7;
 }
