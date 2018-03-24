@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $.ajax({
-        url: "rest/auth/get_current_user",
+        url: "rest/game/get_current_user",
         contentType: "application/json",
         method: 'GET',
         success: [
@@ -36,7 +36,7 @@ $(document).ready(function () {
 
     $("#logout_btn").click(function () {
         $.ajax({
-            url: "rest/auth/logout",
+            url: "rest/game/logout",
             method: 'POST',
             contentType: 'text/plain',
             success: [
@@ -56,7 +56,7 @@ $(document).ready(function () {
 
 function reset() {
     $.ajax({
-        url: "rest/logic/reset_score",
+        url: "rest/game/reset_score",
         contentType: "text/plain",
         method: 'POST',
         success: [
@@ -72,7 +72,7 @@ function reset() {
     });
 
     $.ajax({
-        url: "rest/logic/reset_game",
+        url: "rest/game/reset_game",
         contentType: "text/plain",
         method: 'POST',
         success: [

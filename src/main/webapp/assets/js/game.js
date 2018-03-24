@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: "rest/auth/get_current_user",
+        url: "rest/game/get_current_user",
         contentType: "application/json",
         method: 'GET',
         success: [
@@ -31,7 +31,7 @@ $(document).ready(function () {
         console.log("A clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=a",
+            url: "rest/game/is_char_guessed?ch=a",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -63,7 +63,7 @@ $(document).ready(function () {
         console.log("B clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=b",
+            url: "rest/game/is_char_guessed?ch=b",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -90,7 +90,7 @@ $(document).ready(function () {
         console.log("C clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=c",
+            url: "rest/game/is_char_guessed?ch=c",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -117,7 +117,7 @@ $(document).ready(function () {
         console.log("D clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=d",
+            url: "rest/game/is_char_guessed?ch=d",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -144,7 +144,7 @@ $(document).ready(function () {
         console.log("E clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=e",
+            url: "rest/game/is_char_guessed?ch=e",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -171,7 +171,7 @@ $(document).ready(function () {
         console.log("F clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=f",
+            url: "rest/game/is_char_guessed?ch=f",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -198,7 +198,7 @@ $(document).ready(function () {
         console.log("G clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=g",
+            url: "rest/game/is_char_guessed?ch=g",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -225,7 +225,7 @@ $(document).ready(function () {
         console.log("H clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=h",
+            url: "rest/game/is_char_guessed?ch=h",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -252,7 +252,7 @@ $(document).ready(function () {
         console.log("I clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=i",
+            url: "rest/game/is_char_guessed?ch=i",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -279,7 +279,7 @@ $(document).ready(function () {
         console.log("J clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=j",
+            url: "rest/game/is_char_guessed?ch=j",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -306,7 +306,7 @@ $(document).ready(function () {
         console.log("K clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=k",
+            url: "rest/game/is_char_guessed?ch=k",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -333,7 +333,7 @@ $(document).ready(function () {
         console.log("L clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=l",
+            url: "rest/game/is_char_guessed?ch=l",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -360,7 +360,7 @@ $(document).ready(function () {
         console.log("M clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=m",
+            url: "rest/game/is_char_guessed?ch=m",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -387,7 +387,7 @@ $(document).ready(function () {
         console.log("N clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=n",
+            url: "rest/game/is_char_guessed?ch=n",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -414,7 +414,7 @@ $(document).ready(function () {
         console.log("O clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=o",
+            url: "rest/game/is_char_guessed?ch=o",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -441,7 +441,7 @@ $(document).ready(function () {
         console.log("P clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=p",
+            url: "rest/game/is_char_guessed?ch=p",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -468,7 +468,7 @@ $(document).ready(function () {
         console.log("Q clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=q",
+            url: "rest/game/is_char_guessed?ch=q",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -495,7 +495,7 @@ $(document).ready(function () {
         console.log("R clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=r",
+            url: "rest/game/is_char_guessed?ch=r",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -522,7 +522,7 @@ $(document).ready(function () {
         console.log("S clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=s",
+            url: "rest/game/is_char_guessed?ch=s",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -549,7 +549,7 @@ $(document).ready(function () {
         console.log("T clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=t",
+            url: "rest/game/is_char_guessed?ch=t",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -576,7 +576,7 @@ $(document).ready(function () {
         console.log("U clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=u",
+            url: "rest/game/is_char_guessed?ch=u",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -603,7 +603,7 @@ $(document).ready(function () {
         console.log("V clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=v",
+            url: "rest/game/is_char_guessed?ch=v",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -630,7 +630,7 @@ $(document).ready(function () {
         console.log("W clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=w",
+            url: "rest/game/is_char_guessed?ch=w",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -657,7 +657,7 @@ $(document).ready(function () {
         console.log("X clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=x",
+            url: "rest/game/is_char_guessed?ch=x",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -684,7 +684,7 @@ $(document).ready(function () {
         console.log("Y clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=y",
+            url: "rest/game/is_char_guessed?ch=y",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -711,7 +711,7 @@ $(document).ready(function () {
         console.log("Z clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=z",
+            url: "rest/game/is_char_guessed?ch=z",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -738,7 +738,7 @@ $(document).ready(function () {
         console.log("Æ clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=æ",
+            url: "rest/game/is_char_guessed?ch=æ",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -765,7 +765,7 @@ $(document).ready(function () {
         console.log("Ø clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=ø",
+            url: "rest/game/is_char_guessed?ch=ø",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -792,7 +792,7 @@ $(document).ready(function () {
         console.log("Å clicked!");
 
         $.ajax({
-            url: "rest/logic/is_char_guessed?ch=å",
+            url: "rest/game/is_char_guessed?ch=å",
             contentType: "text/plain",
             method: 'GET',
             success: [
@@ -819,7 +819,7 @@ $(document).ready(function () {
 
 function updateData() {
     $.ajax({
-        url: "rest/logic/get_guessed_word",
+        url: "rest/game/get_guessed_word",
         contentType: "text/plain",
         method: 'GET',
         success: [
@@ -836,7 +836,7 @@ function updateData() {
     });
 
     $.ajax({
-        url: "rest/logic/get_guessed_chars",
+        url: "rest/game/get_guessed_chars",
         contentType: "text/plain",
         method: 'GET',
         success: [
@@ -853,7 +853,7 @@ function updateData() {
     });
 
     $.ajax({
-        url: "rest/logic/get_score",
+        url: "rest/game/get_score",
         contentType: "text/plain",
         method: 'GET',
         success: [
@@ -871,7 +871,7 @@ function updateData() {
     });
 
     $.ajax({
-        url: "rest/logic/get_life",
+        url: "rest/game/get_life",
         contentType: "text/plain",
         method: 'GET',
         success: [
@@ -905,7 +905,7 @@ function updateData() {
     });
 
     $.ajax({
-        url: "rest/logic/is_game_won",
+        url: "rest/game/is_game_won",
         contentType: "text/plain",
         method: 'GET',
         success: [
@@ -929,7 +929,7 @@ function updateData() {
     });
 
     $.ajax({
-        url: "rest/logic/is_game_lost",
+        url: "rest/game/is_game_lost",
         contentType: "text/plain",
         method: 'GET',
         success: [
@@ -955,7 +955,7 @@ function updateData() {
 
 function guess(char) {
     $.ajax({
-        url: "rest/logic/guess?ch=" + char,
+        url: "rest/game/guess?ch=" + char,
         contentType: "plain/text",
         method: 'POST',
         success: [
@@ -973,7 +973,7 @@ function guess(char) {
 
 function reset() {
     $.ajax({
-        url: "rest/logic/reset_score",
+        url: "rest/game/reset_score",
         contentType: "text/plain",
         method: 'POST',
         success: [
@@ -989,7 +989,7 @@ function reset() {
     });
 
     $.ajax({
-        url: "rest/logic/reset_game",
+        url: "rest/game/reset_game",
         contentType: "text/plain",
         method: 'POST',
         success: [
@@ -1007,7 +1007,7 @@ function reset() {
 
 function isCharGuessed(char) {
     $.ajax({
-        url: "rest/logic/is_char_guessed?ch=",
+        url: "rest/game/is_char_guessed?ch=",
         contentType: "text/plain",
         method: 'GET',
         success: [

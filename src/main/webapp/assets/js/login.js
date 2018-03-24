@@ -9,7 +9,7 @@ $(document).ready(function () {
 
         var postData = $('#login_form').serializeJSON();
 
-        var restURL = "rest/auth/login?username=" + username + "&password=" + password;
+        var restURL = "rest/game/login?username=" + username + "&password=" + password;
 
         $.ajax({
             url: restURL,
@@ -36,7 +36,7 @@ $(document).ready(function () {
             ],
             error: [
                 function (jqXHR, text, error) {
-                    console.log("ERROR: " + username + ":" + password);
+                    console.log("ERROR: " + username);
                 }
             ]
         });

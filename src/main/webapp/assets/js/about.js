@@ -3,7 +3,7 @@ $(document).ready(function () {
     var postData;
 
     $.ajax({
-        url: "rest/auth/get_current_user",
+        url: "rest/game/get_current_user",
         contentType: "application/json",
         method: 'GET',
         data: postData,

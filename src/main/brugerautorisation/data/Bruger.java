@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Bruger implements Serializable {
+
     private static final long serialVersionUID = 12345L;
     public String brugernavn;
     public String email = "hvad@ved.jeg.dk";
@@ -16,9 +17,11 @@ public class Bruger implements Serializable {
     public HashMap<String, Object> ekstraFelter = new HashMap();
 
     public Bruger() {
+
     }
 
     public String toString() {
         return this.email;
     }
+
 }

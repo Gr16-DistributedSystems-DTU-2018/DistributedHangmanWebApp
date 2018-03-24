@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $.ajax({
-        url: "rest/auth/get_current_user",
+        url: "rest/game/get_current_user",
         contentType: "application/json",
         method: 'GET',
         success: [
@@ -21,7 +21,7 @@ $(document).ready(function () {
 
 function setData(userData) {
     $.ajax({
-        url: "rest/auth/get_user_field?username=" + userData['brugernavn'] + "&password=" + userData['adgangskode'] + "&userFieldKey=s151641_highscore",
+        url: "rest/game/get_user_field?username=" + userData['brugernavn'] + "&password=" + userData['adgangskode'] + "&userFieldKey=s151641_highscore",
         contentType: "application/json",
         method: 'GET',
         success: [
