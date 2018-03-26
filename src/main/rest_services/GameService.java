@@ -21,7 +21,6 @@ public class GameService implements IGameService {
     private static final String ERROR = "Server error has occurred: ";
 
     private IGameLobby lobby;
-    private IGameLogic logic;
 
     public GameService() throws Exception {
         lobby = (IGameLobby) Naming.lookup(Utils.RMI_STUB_URL_REMOTE_LOBBY_JAVABOG);
@@ -46,7 +45,6 @@ public class GameService implements IGameService {
 
             }
             lobby.logIn(username, password);
-            logic = lobby.getGameLogicInstance(username);
             return Response.ok().entity(username + " logged in successfully.").build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -60,7 +58,6 @@ public class GameService implements IGameService {
     public Response logOut(@QueryParam("username") String username) throws RESTException {
         try {
             lobby.logOut(username);
-            logic = null;
             return Response.ok().entity(username + " logged out successfully.").build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -247,9 +244,10 @@ public class GameService implements IGameService {
     @Path("/guess")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response guess(@QueryParam("ch") char ch) throws RESTException {
+    public Response guess(@QueryParam("username") String username,
+                          @QueryParam("ch") char ch) throws RESTException {
         try {
-            boolean result = logic.guess(ch);
+            boolean result = lobby.getGameLogicInstance(username).guess(ch);
             return Response.ok().entity(result).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -259,9 +257,9 @@ public class GameService implements IGameService {
     @POST
     @Path("/reset_score")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response resetScore() throws RESTException {
+    public Response resetScore(@QueryParam("username") String username) throws RESTException {
         try {
-            logic.resetScore();
+            lobby.getGameLogicInstance(username).resetScore();
             return Response.ok().entity("Score reset successfully.").build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -271,9 +269,9 @@ public class GameService implements IGameService {
     @POST
     @Path("/reset_game")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response resetGame() throws RESTException {
+    public Response resetGame(@QueryParam("username") String username) throws RESTException {
         try {
-            logic.resetGame();
+            lobby.getGameLogicInstance(username).resetGame();
             return Response.ok().entity("Game reset successfully.").build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -283,9 +281,9 @@ public class GameService implements IGameService {
     @GET
     @Path("/get_guessed_chars")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response getGuessedChars() throws RESTException {
+    public Response getGuessedChars(@QueryParam("username") String username) throws RESTException {
         try {
-            String chars = logic.getGuessedChars();
+            String chars = lobby.getGameLogicInstance(username).getGuessedChars();
             return Response.ok().entity(chars).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -295,9 +293,9 @@ public class GameService implements IGameService {
     @GET
     @Path("/get_word")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response getWord() throws RESTException {
+    public Response getWord(@QueryParam("username") String username) throws RESTException {
         try {
-            String word = logic.getWord();
+            String word = lobby.getGameLogicInstance(username).getWord();
             return Response.ok().entity(word).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -307,9 +305,9 @@ public class GameService implements IGameService {
     @GET
     @Path("/get_life")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response getLife() throws RESTException {
+    public Response getLife(@QueryParam("username") String username) throws RESTException {
         try {
-            int life = logic.getLife();
+            int life = lobby.getGameLogicInstance(username).getLife();
             return Response.ok().entity(life).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -319,9 +317,9 @@ public class GameService implements IGameService {
     @GET
     @Path("/get_score")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response getScore() throws RESTException {
+    public Response getScore(@QueryParam("username") String username) throws RESTException {
         try {
-            int score = logic.getScore();
+            int score = lobby.getGameLogicInstance(username).getScore();
             return Response.ok().entity(score).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -332,9 +330,10 @@ public class GameService implements IGameService {
     @Path("/is_char_guessed")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response isCharGuessed(@QueryParam("ch") char ch) throws RESTException {
+    public Response isCharGuessed(@QueryParam("username") String username,
+                                  @QueryParam("ch") char ch) throws RESTException {
         try {
-            boolean isCharGuessed = logic.isCharGuessed(ch);
+            boolean isCharGuessed = getGameLogicInstance(username).isCharGuessed(ch);
             return Response.ok().entity(isCharGuessed).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -344,9 +343,9 @@ public class GameService implements IGameService {
     @GET
     @Path("/is_game_won")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response isGameWon() throws RESTException {
+    public Response isGameWon(@QueryParam("username") String username) throws RESTException {
         try {
-            boolean isGameWon = logic.isGameWon();
+            boolean isGameWon = lobby.getGameLogicInstance(username).isGameWon();
             return Response.ok().entity(isGameWon).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -356,9 +355,9 @@ public class GameService implements IGameService {
     @GET
     @Path("/is_game_lost")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response isGameLost() throws RESTException {
+    public Response isGameLost(@QueryParam("username") String username) throws RESTException {
         try {
-            boolean isGameLost = logic.isGameLost();
+            boolean isGameLost = lobby.getGameLogicInstance(username).isGameLost();
             return Response.ok().entity(isGameLost).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -372,7 +371,7 @@ public class GameService implements IGameService {
     public Response isHighScore(@QueryParam("username") String username,
                                 @QueryParam("password") String password) throws RESTException {
         try {
-            boolean isHighscore = logic.isHighScore(username, password);
+            boolean isHighscore = lobby.getGameLogicInstance(username).isHighScore(username, password);
             return Response.ok().entity(isHighscore).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -385,14 +384,7 @@ public class GameService implements IGameService {
     public Response test() throws RESTException {
         StringBuilder sb = new StringBuilder();
         sb.append("#### ").append(getClass().getSimpleName()).append(" REST Test ####\n");
-
-        if (logic == null)
-            sb.append("Logic: null\n");
-        else
-            sb.append("Logic: instantiated\n");
-
         sb.append("If you see this, the REST GameService seems to be working! :) ¯\\_(ツ)_/¯");
-
         return Response.ok().entity(sb.toString()).build();
     }
 

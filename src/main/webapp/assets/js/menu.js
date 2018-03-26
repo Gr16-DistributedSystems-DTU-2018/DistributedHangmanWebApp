@@ -92,7 +92,7 @@ function sendEmail() {
                 alertify.defaultValue("Enter Message").prompt("Enter email message", function (message, event4) {
                     event4.preventDefault();
                     $.ajax({
-                        url: "rest/game/send_email?username=" + username + "&password=" + password + "&subject=" + subject + "&msg=" + message,
+                        url: "rest/game/send_email?username=" + username + "&password=" + password + "&subject=" + subject + "&msg=" + message + " --- Sendt via Gruppe 16 - DistributedHangman",
                         method: 'GET',
                         contentType: 'text/plain',
                         success: [

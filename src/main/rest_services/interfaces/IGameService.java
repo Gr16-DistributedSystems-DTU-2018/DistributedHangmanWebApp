@@ -1,7 +1,5 @@
 package rest_services.interfaces;
 
-import server.logic.rmi.IGameLogic;
-
 import javax.ws.rs.core.Response;
 
 public interface IGameService {
@@ -9,7 +7,6 @@ public interface IGameService {
     Response logIn(String username, String password) throws RESTException;
     Response logOut(String username) throws RESTException;
 
-    IGameLogic getGameLogicInstance(String username) throws RESTException;
     Response getAllCurrentUserNames() throws RESTException;
     Response getUserAmount() throws RESTException;
     Response getLoggedInUser(String username) throws RESTException;
@@ -26,19 +23,19 @@ public interface IGameService {
     Response changeUserPassword(String username, String oldPassword, String newPassword) throws RESTException;
 
     /* Hangman */
-    Response guess(char ch) throws RESTException;
+    Response guess(String username, char ch) throws RESTException;
 
-    Response resetScore() throws RESTException;
-    Response resetGame() throws RESTException;
+    Response resetScore(String username) throws RESTException;
+    Response resetGame(String username) throws RESTException;
 
-    Response getGuessedChars() throws RESTException;
-    Response getWord() throws RESTException;
-    Response getLife() throws RESTException;
-    Response getScore() throws RESTException;
+    Response getGuessedChars(String username) throws RESTException;
+    Response getWord(String username) throws RESTException;
+    Response getLife(String username) throws RESTException;
+    Response getScore(String username) throws RESTException;
 
-    Response isCharGuessed(char ch) throws RESTException;
-    Response isGameWon() throws RESTException;
-    Response isGameLost() throws RESTException;
+    Response isCharGuessed(String username, char ch) throws RESTException;
+    Response isGameWon(String username) throws RESTException;
+    Response isGameLost(String username) throws RESTException;
     Response isHighScore(String username, String password) throws RESTException;
 
     /* Test */

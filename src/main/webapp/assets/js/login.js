@@ -59,7 +59,7 @@ $(document).ready(function () {
             // The click event is in the event variable, so you can use it here.
             event.preventDefault();
             $.ajax({
-                url: "rest/game/send_forgot_password_email?username=" + username + "&msg= ",
+                url: "rest/game/send_forgot_password_email?username=" + username + "&msg=Hilsen Gruppe 16 - DistributedHangman",
                 contentType: "text/plain",
                 method: 'GET',
                 success: [
