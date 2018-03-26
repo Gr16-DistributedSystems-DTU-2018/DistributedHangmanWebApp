@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     $("#login_form").on('submit', function (e) {
         e.preventDefault();
 
@@ -20,6 +19,7 @@ $(document).ready(function () {
                 function (data) {
                     if (data === username + " logged in successfully.") {
                         console.log(data);
+                        saveSessionUsername(username);
                         window.location.replace("menu.html");
                     } else {
                         var usernameEle = $("#username_fld");
@@ -31,32 +31,58 @@ $(document).ready(function () {
                         passwordEle.removeClass();
                         passwordEle = reset(passwordEle);
                         passwordEle.addClass("animated shake");
+                        alertify.error("Invalid credentials!");
                     }
                 }
             ],
             error: [
                 function (jqXHR, text, error) {
-                    console.log("ERROR: " + username);
+                    var usernameEle = $("#username_fld");
+                    usernameEle.removeClass();
+                    usernameEle = reset(usernameEle);
+                    usernameEle.addClass("animated shake");
+
+                    var passwordEle = $("#password_fld");
+                    passwordEle.removeClass();
+                    passwordEle = reset(passwordEle);
+                    passwordEle.addClass("animated shake");
+                    alertify.error("Invalid credentials!");
                 }
             ]
         });
-
     });
-
 });
 
 $(document).ready(function () {
     $("#forgot_pass_btn").click(function () {
-        var username = $("#username_fld").val();
-
-        if (username.size < 5 || username.size > 7) {
-            alert("Please type a valid username so I can reset your password.")
-        } else {
-
-        }
-
+        alertify.defaultValue("Enter Username").prompt("Enter your username, and you'll get an email with your password.", function (username, event) {
+            // The click event is in the event variable, so you can use it here.
+            event.preventDefault();
+            $.ajax({
+                url: "rest/game/send_forgot_password_email?username=" + username + "&msg= ",
+                contentType: "text/plain",
+                method: 'GET',
+                success: [
+                    function (data) {
+                        alertify.success("Your password has been sent.\nPlease check your email.");
+                    }
+                ],
+                error: [
+                    function (jqXHR, text, error) {
+                        alertify.error("Failed to send password to " + username + ". Please try again.");
+                    }
+                ]
+            });
+        }, function (ev) {
+            // The click event is in the event variable, so you can use it here.
+            ev.preventDefault();
+        });
     });
 });
+
+function saveSessionUsername(username) {
+    sessionStorage.username = username
+}
 
 function reset($elem) {
     $elem.before($elem.clone(true));

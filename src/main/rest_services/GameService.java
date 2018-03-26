@@ -38,11 +38,18 @@ public class GameService implements IGameService {
             @QueryParam("username") String username,
             @QueryParam("password") String password) throws RESTException {
         try {
+            /* ######### TEMPORARY FIX... LOGS OUT THE USER FIRST! ######## */
+            try {
+                lobby.logOut(username);
+                System.out.println("###### " + username + " was already logged in, so we logged them out! ########");
+            } catch (Exception ignored) {
+
+            }
             lobby.logIn(username, password);
             logic = lobby.getGameLogicInstance(username);
             return Response.ok().entity(username + " logged in successfully.").build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -56,7 +63,7 @@ public class GameService implements IGameService {
             logic = null;
             return Response.ok().entity(username + " logged out successfully.").build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -80,7 +87,7 @@ public class GameService implements IGameService {
             List<String> usernames = lobby.getAllCurrentUserNames();
             return Response.ok().entity(usernames).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -92,20 +99,22 @@ public class GameService implements IGameService {
             int userAmount = lobby.getUserAmount();
             return Response.ok().entity(userAmount).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
     @GET
     @Path("/get_logged_in_user")
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getLoggedInUser(@QueryParam("username") String username) throws RESTException {
         try {
             Bruger user = lobby.getLoggedInUser(username);
-            return Response.ok().entity(user).build();
+            if (user != null)
+                return Response.ok().entity(user).build();
+            else
+                return Response.serverError().entity(ERROR + "User is null!").build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -118,7 +127,7 @@ public class GameService implements IGameService {
             boolean isLoggedIn = lobby.isLoggedIn(username);
             return Response.ok().entity(isLoggedIn).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -130,7 +139,7 @@ public class GameService implements IGameService {
             Bruger user = lobby.getUserWithHighestHighscore();
             return Response.ok().entity(user).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -145,7 +154,7 @@ public class GameService implements IGameService {
             lobby.setUserHighscore(username, highscore);
             return Response.ok().entity(username + ": set highscore: " + highscore).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -158,7 +167,7 @@ public class GameService implements IGameService {
             String highscore = lobby.getUserHighscore(username);
             return Response.ok().entity(highscore).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -170,7 +179,7 @@ public class GameService implements IGameService {
             Map<String, Integer> userScores = lobby.getAllUsersScore();
             return Response.ok().entity(userScores).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -182,7 +191,7 @@ public class GameService implements IGameService {
             Map<String, Integer> userHighScores = lobby.getAllUsersHighscore();
             return Response.ok().entity(userHighScores).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -198,7 +207,7 @@ public class GameService implements IGameService {
             lobby.sendUserEmail(username, password, subject, msg);
             return Response.ok().entity("Sent email to " + username + ". Subject: " + subject + ": msg: " + msg).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -212,22 +221,22 @@ public class GameService implements IGameService {
             lobby.sendForgotPasswordEmail(username, msg);
             return Response.ok().entity("Sent forgot password email to: " + username + ": " + msg).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
-    @GET
+    @POST
     @Path("/change_user_password")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
     public Response changeUserPassword(@QueryParam("username") String username,
                                        @QueryParam("oldPassword") String oldPassword,
-                                       @QueryParam("newPassword") String newPassword) throws RESTException {
+                                       @QueryParam("changePassword") String newPassword) throws RESTException {
         try {
             lobby.changeUserPassword(username, oldPassword, newPassword);
             return Response.ok().entity("Changed password for: " + username).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -243,7 +252,7 @@ public class GameService implements IGameService {
             boolean result = logic.guess(ch);
             return Response.ok().entity(result).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -255,7 +264,7 @@ public class GameService implements IGameService {
             logic.resetScore();
             return Response.ok().entity("Score reset successfully.").build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -267,7 +276,7 @@ public class GameService implements IGameService {
             logic.resetGame();
             return Response.ok().entity("Game reset successfully.").build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -279,7 +288,7 @@ public class GameService implements IGameService {
             String chars = logic.getGuessedChars();
             return Response.ok().entity(chars).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -291,7 +300,7 @@ public class GameService implements IGameService {
             String word = logic.getWord();
             return Response.ok().entity(word).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -303,7 +312,7 @@ public class GameService implements IGameService {
             int life = logic.getLife();
             return Response.ok().entity(life).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -315,7 +324,7 @@ public class GameService implements IGameService {
             int score = logic.getScore();
             return Response.ok().entity(score).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -328,7 +337,7 @@ public class GameService implements IGameService {
             boolean isCharGuessed = logic.isCharGuessed(ch);
             return Response.ok().entity(isCharGuessed).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -340,7 +349,7 @@ public class GameService implements IGameService {
             boolean isGameWon = logic.isGameWon();
             return Response.ok().entity(isGameWon).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -352,7 +361,7 @@ public class GameService implements IGameService {
             boolean isGameLost = logic.isGameLost();
             return Response.ok().entity(isGameLost).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
@@ -366,7 +375,7 @@ public class GameService implements IGameService {
             boolean isHighscore = logic.isHighScore(username, password);
             return Response.ok().entity(isHighscore).build();
         } catch (RemoteException e) {
-            return Response.ok().entity(ERROR + e.getMessage()).build();
+            return Response.serverError().entity(ERROR + e.getMessage()).build();
         }
     }
 
