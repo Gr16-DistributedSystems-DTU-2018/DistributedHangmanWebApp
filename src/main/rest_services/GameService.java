@@ -55,7 +55,8 @@ public class GameService implements IGameService {
     @Path("/logout")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response logOut(@QueryParam("username") String username) throws RESTException {
+    public Response logOut(
+            @QueryParam("username") String username) throws RESTException {
         try {
             lobby.logOut(username);
             return Response.ok().entity(username + " logged out successfully.").build();
@@ -68,7 +69,8 @@ public class GameService implements IGameService {
     @Path("/get_logic")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    public IGameLogic getGameLogicInstance(@QueryParam("username") String username) throws RESTException {
+    public IGameLogic getGameLogicInstance(
+            @QueryParam("username") String username) throws RESTException {
         try {
             return lobby.getGameLogicInstance(username);
         } catch (RemoteException e) {
@@ -103,7 +105,8 @@ public class GameService implements IGameService {
     @GET
     @Path("/get_logged_in_user")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getLoggedInUser(@QueryParam("username") String username) throws RESTException {
+    public Response getLoggedInUser(
+            @QueryParam("username") String username) throws RESTException {
         try {
             Bruger user = lobby.getLoggedInUser(username);
             if (user != null)
@@ -119,7 +122,8 @@ public class GameService implements IGameService {
     @Path("/is_logged_in")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response isLoggedIn(@QueryParam("username") String username) throws RESTException {
+    public Response isLoggedIn(
+            @QueryParam("username") String username) throws RESTException {
         try {
             boolean isLoggedIn = lobby.isLoggedIn(username);
             return Response.ok().entity(isLoggedIn).build();
@@ -159,7 +163,8 @@ public class GameService implements IGameService {
     @Path("/get_user_highscore")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response getUserHighscore(@QueryParam("username") String username) throws RESTException {
+    public Response getUserHighscore(
+            @QueryParam("username") String username) throws RESTException {
         try {
             String highscore = lobby.getUserHighscore(username);
             return Response.ok().entity(highscore).build();
@@ -196,10 +201,11 @@ public class GameService implements IGameService {
     @Path("/send_email")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response sendUserEmail(@QueryParam("username") String username,
-                                  @QueryParam("password") String password,
-                                  @QueryParam("subject") String subject,
-                                  @QueryParam("msg") String msg) throws RESTException {
+    public Response sendUserEmail(
+            @QueryParam("username") String username,
+            @QueryParam("password") String password,
+            @QueryParam("subject") String subject,
+            @QueryParam("msg") String msg) throws RESTException {
         try {
             lobby.sendUserEmail(username, password, subject, msg);
             return Response.ok().entity("Sent email to " + username + ". Subject: " + subject + ": msg: " + msg).build();
@@ -212,8 +218,9 @@ public class GameService implements IGameService {
     @Path("/send_forgot_password_email")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response sendForgotPasswordEmail(@QueryParam("username") String username,
-                                            @QueryParam("msg") String msg) throws RESTException {
+    public Response sendForgotPasswordEmail(
+            @QueryParam("username") String username,
+            @QueryParam("msg") String msg) throws RESTException {
         try {
             lobby.sendForgotPasswordEmail(username, msg);
             return Response.ok().entity("Sent forgot password email to: " + username + ": " + msg).build();
@@ -226,9 +233,10 @@ public class GameService implements IGameService {
     @Path("/change_user_password")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response changeUserPassword(@QueryParam("username") String username,
-                                       @QueryParam("oldPassword") String oldPassword,
-                                       @QueryParam("changePassword") String newPassword) throws RESTException {
+    public Response changeUserPassword(
+            @QueryParam("username") String username,
+            @QueryParam("oldPassword") String oldPassword,
+            @QueryParam("changePassword") String newPassword) throws RESTException {
         try {
             lobby.changeUserPassword(username, oldPassword, newPassword);
             return Response.ok().entity("Changed password for: " + username).build();
@@ -244,8 +252,9 @@ public class GameService implements IGameService {
     @Path("/guess")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response guess(@QueryParam("username") String username,
-                          @QueryParam("ch") char ch) throws RESTException {
+    public Response guess(
+            @QueryParam("username") String username,
+            @QueryParam("ch") char ch) throws RESTException {
         try {
             boolean result = lobby.getGameLogicInstance(username).guess(ch);
             return Response.ok().entity(result).build();
@@ -257,7 +266,8 @@ public class GameService implements IGameService {
     @POST
     @Path("/reset_score")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response resetScore(@QueryParam("username") String username) throws RESTException {
+    public Response resetScore(
+            @QueryParam("username") String username) throws RESTException {
         try {
             lobby.getGameLogicInstance(username).resetScore();
             return Response.ok().entity("Score reset successfully.").build();
@@ -269,7 +279,8 @@ public class GameService implements IGameService {
     @POST
     @Path("/reset_game")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response resetGame(@QueryParam("username") String username) throws RESTException {
+    public Response resetGame(
+            @QueryParam("username") String username) throws RESTException {
         try {
             lobby.getGameLogicInstance(username).resetGame();
             return Response.ok().entity("Game reset successfully.").build();
@@ -281,7 +292,8 @@ public class GameService implements IGameService {
     @GET
     @Path("/get_guessed_chars")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response getGuessedChars(@QueryParam("username") String username) throws RESTException {
+    public Response getGuessedChars(
+            @QueryParam("username") String username) throws RESTException {
         try {
             String chars = lobby.getGameLogicInstance(username).getGuessedChars();
             return Response.ok().entity(chars).build();
@@ -293,7 +305,8 @@ public class GameService implements IGameService {
     @GET
     @Path("/get_word")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response getWord(@QueryParam("username") String username) throws RESTException {
+    public Response getWord(
+            @QueryParam("username") String username) throws RESTException {
         try {
             String word = lobby.getGameLogicInstance(username).getWord();
             return Response.ok().entity(word).build();
@@ -305,7 +318,8 @@ public class GameService implements IGameService {
     @GET
     @Path("/get_life")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response getLife(@QueryParam("username") String username) throws RESTException {
+    public Response getLife(
+            @QueryParam("username") String username) throws RESTException {
         try {
             int life = lobby.getGameLogicInstance(username).getLife();
             return Response.ok().entity(life).build();
@@ -317,7 +331,8 @@ public class GameService implements IGameService {
     @GET
     @Path("/get_score")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response getScore(@QueryParam("username") String username) throws RESTException {
+    public Response getScore(
+            @QueryParam("username") String username) throws RESTException {
         try {
             int score = lobby.getGameLogicInstance(username).getScore();
             return Response.ok().entity(score).build();
@@ -330,8 +345,9 @@ public class GameService implements IGameService {
     @Path("/is_char_guessed")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response isCharGuessed(@QueryParam("username") String username,
-                                  @QueryParam("ch") char ch) throws RESTException {
+    public Response isCharGuessed(
+            @QueryParam("username") String username,
+            @QueryParam("ch") char ch) throws RESTException {
         try {
             boolean isCharGuessed = getGameLogicInstance(username).isCharGuessed(ch);
             return Response.ok().entity(isCharGuessed).build();
@@ -343,7 +359,8 @@ public class GameService implements IGameService {
     @GET
     @Path("/is_game_won")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response isGameWon(@QueryParam("username") String username) throws RESTException {
+    public Response isGameWon(
+            @QueryParam("username") String username) throws RESTException {
         try {
             boolean isGameWon = lobby.getGameLogicInstance(username).isGameWon();
             return Response.ok().entity(isGameWon).build();
@@ -355,7 +372,8 @@ public class GameService implements IGameService {
     @GET
     @Path("/is_game_lost")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response isGameLost(@QueryParam("username") String username) throws RESTException {
+    public Response isGameLost(
+            @QueryParam("username") String username) throws RESTException {
         try {
             boolean isGameLost = lobby.getGameLogicInstance(username).isGameLost();
             return Response.ok().entity(isGameLost).build();
@@ -368,8 +386,9 @@ public class GameService implements IGameService {
     @Path("/is_highscore")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response isHighScore(@QueryParam("username") String username,
-                                @QueryParam("password") String password) throws RESTException {
+    public Response isHighScore(
+            @QueryParam("username") String username,
+            @QueryParam("password") String password) throws RESTException {
         try {
             boolean isHighscore = lobby.getGameLogicInstance(username).isHighScore(username, password);
             return Response.ok().entity(isHighscore).build();
