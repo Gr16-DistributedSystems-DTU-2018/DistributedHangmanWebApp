@@ -174,11 +174,11 @@ public class GameService implements IGameService {
     }
 
     @GET
-    @Path("/get_all_users_score")
+    @Path("/get_all_logged_in_users_score")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllUsersScore() throws RESTException {
         try {
-            Map<String, Integer> userScores = lobby.getAllUsersScore();
+            Map<String, Integer> userScores = lobby.getAllLoggedInUsersScore();
             return Response.ok().entity(userScores).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();
@@ -191,6 +191,7 @@ public class GameService implements IGameService {
     public Response getAllUsersHighscore() throws RESTException {
         try {
             Map<String, Integer> userHighScores = lobby.getAllUsersHighscore();
+
             return Response.ok().entity(userHighScores).build();
         } catch (RemoteException e) {
             return Response.serverError().entity(ERROR + e.getMessage()).build();

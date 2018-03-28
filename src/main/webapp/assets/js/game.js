@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+    alertify.alert("The game is not working as of yet. Tons of bugs! :)");
+
     $.ajax({
         url: "rest/game/get_current_user",
         contentType: "application/json",

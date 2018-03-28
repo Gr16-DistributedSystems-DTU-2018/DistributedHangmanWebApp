@@ -1,4 +1,16 @@
+var username;
+
 $(document).ready(function () {
+
+    if (typeof(Storage) !== "undefined") {
+        if (sessionStorage.username) {
+            username = sessionStorage.username;
+            document.getElementById("username_fld").value = username;
+        } else {
+
+        }
+    }
+
     $("#login_form").on('submit', function (e) {
         e.preventDefault();
 
@@ -55,7 +67,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#forgot_pass_btn").click(function () {
-        alertify.defaultValue("Enter Username").prompt("Enter your username, and you'll get an email with your password.", function (username, event) {
+        alertify.defaultValue("Enter Username").prompt("<h2>Forgot Password</h2><br>Enter your username, and you'll get an email with your password.", function (username, event) {
             // The click event is in the event variable, so you can use it here.
             event.preventDefault();
             $.ajax({
