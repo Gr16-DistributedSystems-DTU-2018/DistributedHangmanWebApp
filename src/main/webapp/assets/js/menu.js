@@ -6,7 +6,7 @@ $(document).ready(function () {
         if (sessionStorage.username) {
             username = sessionStorage.username;
         } else {
-            document.getElementById("welcome_header").innerHTML = "Something has gone terribly, TERRIBLY wrong!";
+            alertify.error("Could not fetch username!");
         }
     }
 
@@ -30,8 +30,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 
     $("#play_btn").on("click", function () {
-        reset();
-        window.location.replace("game.html");
+        resetAndPlay();
     });
 
     $("#lobby_btn").on("click", function () {
@@ -61,7 +60,7 @@ $(document).ready(function () {
 });
 
 function showLobby() {
-    var scoreText = "<h2>Lobby</h2><br>   User ───── Live Score<br><br>";
+    var scoreText = "<h2>Lobby</h2><br>   User ───────── Live Score<br><br>";
 
     $.ajax({
         url: "rest/game/get_all_logged_in_users_score",
@@ -70,7 +69,7 @@ function showLobby() {
         success: [
             function (data) {
                 for (var key in data) {
-                    scoreText += key + ' ───── ' + data[key] + '<br>';
+                    scoreText += key + ' ─────────  ' + data[key] + '<br>';
                 }
                 alertify.alert(scoreText);
             }
@@ -84,7 +83,7 @@ function showLobby() {
 }
 
 function showHighScores() {
-    var scoreText = "<h2>High Scores</h2><br>   User ───── High Score<br><br>";
+    var scoreText = "<h2>High Scores</h2><br>   User ───────── High Score<br><br>";
 
     $.ajax({
         url: "rest/game/get_all_users_highscore",
@@ -93,7 +92,7 @@ function showHighScores() {
         success: [
             function (data) {
                 for (var key in data) {
-                    scoreText += key + ' ───── ' + data[key] + '<br>';
+                    scoreText += key + ' ───────── ' + data[key] + '<br>';
                 }
                 alertify.alert(scoreText);
             }
@@ -231,37 +230,35 @@ function logOut() {
     });
 }
 
-function reset() {
+function resetAndPlay() {
     $.ajax({
-        url: "rest/game/reset_score",
+        url: "rest/game/reset_score?username=" + username,
         contentType: "text/plain",
         method: 'POST',
         success: [
             function (data) {
                 console.log(data);
+                $.ajax({
+                    url: "rest/game/reset_game?username=" + username,
+                    contentType: "text/plain",
+                    method: 'POST',
+                    success: [
+                        function (data) {
+                            console.log(data);
+                            window.location.replace("game.html");
+                        }
+                    ],
+                    error: [
+                        function (jqXHR, text, error) {
+                            console.log("ERROR: reset_game")
+                        }
+                    ]
+                });
             }
         ],
         error: [
             function (jqXHR, text, error) {
-                console.log("ERROR");
-                alertify.error("Failed to reset score!");
-            }
-        ]
-    });
-
-    $.ajax({
-        url: "rest/game/reset_game",
-        contentType: "text/plain",
-        method: 'POST',
-        success: [
-            function (data) {
-                console.log(data);
-            }
-        ],
-        error: [
-            function (jqXHR, text, error) {
-                console.log("ERROR");
-                alertify.error("Failed to reset the game!");
+                console.log("ERROR: reset_score")
             }
         ]
     });

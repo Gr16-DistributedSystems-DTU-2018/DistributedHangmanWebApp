@@ -97,11 +97,13 @@ body {
 }
 
 .table {
+    font-family: 'coiny', Fallback, sans-serif;
     margin-left: auto;
     margin-right: auto;
 }
 
 button {
+    font-family: 'coiny', Fallback, sans-serif;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;

@@ -1,845 +1,194 @@
+var username;
+var password;
+
 $(document).ready(function () {
 
-    alertify.alert("The game is not working as of yet. Tons of bugs! :)");
+    var container = $("#border_container");
+    container.removeClass("animated bounceIn");
+
+    if (typeof(Storage) !== "undefined") {
+        if (sessionStorage.username) {
+            username = sessionStorage.username;
+        } else {
+
+        }
+    }
+
+    if (typeof(Storage) !== "undefined") {
+        if (sessionStorage.password) {
+            password = sessionStorage.password;
+        } else {
+
+        }
+    }
+
+    checkHighscore(true);
 
     $.ajax({
-        url: "rest/game/get_current_user",
+        url: "rest/game/get_logged_in_user?username=" + username,
         contentType: "application/json",
         method: 'GET',
         success: [
             function (data) {
-                console.log(data);
-                document.getElementById("user").innerHTML = data['brugernavn'] + " " + data['fornavn'] + " " + data['efternavn'];
+                document.getElementById("user").innerHTML = data['fornavn'] + " " + data['efternavn'];
             }
         ],
         error: [
             function (jqXHR, text, error) {
-                console.log("ERROR");
+                alertify.error("Could not show user information!");
             }
         ]
     });
-});
 
-$(document).ready(function () {
     $("#back_btn").click(function () {
+        reset();
         window.location.replace("menu.html");
     });
+
 });
 
 $(document).ready(function () {
-
     updateData();
 
     $("#btn_a").click(function () {
-        console.log("A clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=a",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('a');
-                        updateData();
-                        var btn = $("#btn_a");
-                        btn.removeClass();
-                        btn = reset(btn);
-                        addBoucneOut(btn);
-                        btn.addClass("btn btn-primary")
-                    } else {
-                        alert('A is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('a');
     });
 
     $("#btn_b").click(function () {
-        console.log("B clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=b",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('b');
-                        updateData();
-                    } else {
-                        alert('B is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('b');
     });
 
     $("#btn_c").click(function () {
-        console.log("C clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=c",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('c');
-                        updateData();
-                    } else {
-                        alert('C is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('c');
     });
 
     $("#btn_d").click(function () {
-        console.log("D clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=d",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('d');
-                        updateData();
-                    } else {
-                        alert('D is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('d');
     });
 
     $("#btn_e").click(function () {
-        console.log("E clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=e",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('e');
-                        updateData();
-                    } else {
-                        alert('E is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('e');
     });
 
     $("#btn_f").click(function () {
-        console.log("F clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=f",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('f');
-                        updateData();
-                    } else {
-                        alert('F is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('f');
     });
 
     $("#btn_g").click(function () {
-        console.log("G clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=g",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('g');
-                        updateData();
-                    } else {
-                        alert('G is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('g');
     });
 
     $("#btn_h").click(function () {
-        console.log("H clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=h",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('h');
-                        updateData();
-                    } else {
-                        alert('H is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('h');
     });
 
     $("#btn_i").click(function () {
-        console.log("I clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=i",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('i');
-                        updateData();
-                    } else {
-                        alert('I is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('i');
     });
 
     $("#btn_j").click(function () {
-        console.log("J clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=j",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('j');
-                        updateData();
-                    } else {
-                        alert('J is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('j');
     });
 
     $("#btn_k").click(function () {
-        console.log("K clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=k",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('k');
-                        updateData();
-                    } else {
-                        alert('K is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('k');
     });
 
     $("#btn_l").click(function () {
-        console.log("L clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=l",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('l');
-                        updateData();
-                    } else {
-                        alert('L is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('l');
     });
 
     $("#btn_m").click(function () {
-        console.log("M clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=m",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('m');
-                        updateData();
-                    } else {
-                        alert('M is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('m');
     });
 
     $("#btn_n").click(function () {
-        console.log("N clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=n",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('n');
-                        updateData();
-                    } else {
-                        alert('N is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('n');
     });
 
     $("#btn_o").click(function () {
-        console.log("O clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=o",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('o');
-                        updateData();
-                    } else {
-                        alert('O is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('o');
     });
 
     $("#btn_p").click(function () {
-        console.log("P clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=p",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('p');
-                        updateData();
-                    } else {
-                        alert('P is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('p');
     });
 
     $("#btn_q").click(function () {
-        console.log("Q clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=q",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('q');
-                        updateData();
-                    } else {
-                        alert('Q is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('q');
     });
 
     $("#btn_r").click(function () {
-        console.log("R clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=r",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('r');
-                        updateData();
-                    } else {
-                        alert('R is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('r');
     });
 
     $("#btn_s").click(function () {
-        console.log("S clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=s",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('s');
-                        updateData();
-                    } else {
-                        alert('S is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('s');
     });
 
     $("#btn_t").click(function () {
-        console.log("T clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=t",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('t');
-                        updateData();
-                    } else {
-                        alert('T is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('t');
     });
 
     $("#btn_u").click(function () {
-        console.log("U clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=u",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('u');
-                        updateData();
-                    } else {
-                        alert('U is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('u');
     });
 
     $("#btn_v").click(function () {
-        console.log("V clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=v",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('v');
-                        updateData();
-                    } else {
-                        alert('V is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('v');
     });
 
     $("#btn_w").click(function () {
-        console.log("W clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=w",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('w');
-                        updateData();
-                    } else {
-                        alert('W is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('w');
     });
 
     $("#btn_x").click(function () {
-        console.log("X clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=x",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('x');
-                        updateData();
-                    } else {
-                        alert('X is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('x');
     });
 
     $("#btn_y").click(function () {
-        console.log("Y clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=y",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('y');
-                        updateData();
-                    } else {
-                        alert('Y is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('y');
     });
 
     $("#btn_z").click(function () {
-        console.log("Z clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=z",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('z');
-                        updateData();
-                    } else {
-                        alert('Z is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('z');
     });
 
     $("#btn_æ").click(function () {
-        console.log("Æ clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=æ",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('æ');
-                        updateData();
-                    } else {
-                        alert('Æ is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('æ');
     });
 
     $("#btn_ø").click(function () {
-        console.log("Ø clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=ø",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('ø');
-                        updateData();
-                    } else {
-                        alert('Ø is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('ø');
     });
 
     $("#btn_å").click(function () {
-        console.log("Å clicked!");
-
-        $.ajax({
-            url: "rest/game/is_char_guessed?ch=å",
-            contentType: "text/plain",
-            method: 'GET',
-            success: [
-                function (data) {
-                    console.log("Data: " + data);
-                    if (data === 'false') {
-                        location.reload();
-                        guess('å');
-                        updateData();
-                    } else {
-                        alert('Å is already guessed.')
-                    }
-                }
-            ],
-            error: [
-                function (jqXHR, text, error) {
-                    console.log("ERROR isCharGuessed");
-                }
-            ]
-        });
+        buttonClick('å');
     });
 
 });
 
 function updateData() {
+    console.log("########### updateData ###########")
     $.ajax({
-        url: "rest/game/get_guessed_word",
+        url: "rest/game/get_word?username=" + username,
         contentType: "text/plain",
         method: 'GET',
         success: [
             function (data) {
-                console.log("Word: " + data);
                 document.getElementById("word").innerHTML = data;
             }
         ],
         error: [
             function (jqXHR, text, error) {
-                console.log("ERROR");
+                console.log("ERROR: get_word")
+                alertify.error("Could not fetch the word!");
             }
         ]
     });
 
     $.ajax({
-        url: "rest/game/get_guessed_chars",
+        url: "rest/game/get_guessed_chars?username=" + username,
         contentType: "text/plain",
         method: 'GET',
         success: [
@@ -850,31 +199,30 @@ function updateData() {
         ],
         error: [
             function (jqXHR, text, error) {
-                console.log("ERROR");
+                console.log("ERROR: get_guessed_chars")
             }
         ]
     });
 
     $.ajax({
-        url: "rest/game/get_score",
+        url: "rest/game/get_score?username=" + username,
         contentType: "text/plain",
         method: 'GET',
         success: [
             function (data) {
-                console.log("Got score: + " + data);
+                console.log("Got score: " + data);
                 document.getElementById("score").innerHTML = data;
             }
         ],
         error: [
             function (jqXHR, text, error) {
-                console.log("ERROR");
-                return null;
+                console.log("ERROR: get_score")
             }
         ]
     });
 
     $.ajax({
-        url: "rest/game/get_life",
+        url: "rest/game/get_life?username=" + username,
         contentType: "text/plain",
         method: 'GET',
         success: [
@@ -902,138 +250,192 @@ function updateData() {
         ],
         error: [
             function (jqXHR, text, error) {
-                console.log("ERROR");
+                console.log("ERROR: get_life")
             }
         ]
     });
 
     $.ajax({
-        url: "rest/game/is_game_won",
+        url: "rest/game/is_game_won?username=" + username,
         contentType: "text/plain",
         method: 'GET',
         success: [
             function (data) {
                 if (data === "true") {
-                    var result = confirm("You won! Congratulations!\nWould you like to play again?");
-                    if (result === true) {
-                        reset();
+                    // confirm dialog
+                    alertify.confirm("<h2 style='color: black'>You won!</h2><br>Congratulations! Would you like to play again?", function () {
+                        resetGame();
                         location.reload();
-                    } else {
-                        alert("Okay :(")
-                    }
+                    }, function () {
+                        window.location.replace("menu.html")
+                    });
                 }
             }
         ],
         error: [
             function (jqXHR, text, error) {
-                console.log("ERROR");
+                console.log("ERROR: is_game_won")
             }
         ]
     });
 
     $.ajax({
-        url: "rest/game/is_game_lost",
+        url: "rest/game/is_game_lost?username=" + username,
         contentType: "text/plain",
         method: 'GET',
         success: [
             function (data) {
                 if (data === "true") {
-                    var result = confirm("You lost! :(\nWould you like to play again?");
-                    if (result === true) {
+                    // confirm dialog
+                    alertify.confirm("<h2 style='color: black'>You lost!</h2><br>Sorry, you lost! Would you like to play again?", function () {
                         reset();
                         location.reload();
-                    } else {
-                        alert("Okay :(")
-                    }
+                    }, function () {
+                        window.location.replace("menu.html")
+                    });
                 }
             }
         ],
         error: [
             function (jqXHR, text, error) {
-                console.log("ERROR");
+                console.log("ERROR: is_game_lost")
+            }
+        ]
+    });
+    console.log("#####################################")
+}
+
+function guess(char) {
+    $.ajax({
+        url: "rest/game/guess?username=" + username + "&ch=" + char,
+        contentType: "plain/text",
+        method: 'POST',
+        success: [
+            function (data) {
+                console.log("Guessed: " + char + ": Was in word: " + data);
+            }
+        ],
+        error: [
+            function (jqXHR, text, error) {
+                console.log("ERROR: guess")
             }
         ]
     });
 }
 
-function guess(char) {
+
+function resetScore() {
     $.ajax({
-        url: "rest/game/guess?ch=" + char,
-        contentType: "plain/text",
+        url: "rest/game/reset_score?username=" + username,
+        contentType: "text/plain",
         method: 'POST',
         success: [
             function (data) {
-                console.log("Guessed: " + char + ": Result: " + data);
+                console.log(data);
             }
         ],
         error: [
             function (jqXHR, text, error) {
-                console.log("ERROR");
+                console.log("ERROR: reset_score")
+            }
+        ]
+    });
+}
+
+function resetGame() {
+    $.ajax({
+        url: "rest/game/reset_game?username=" + username,
+        contentType: "text/plain",
+        method: 'POST',
+        success: [
+            function (data) {
+                console.log(data);
+            }
+        ],
+        error: [
+            function (jqXHR, text, error) {
+                console.log("ERROR: reset_game")
             }
         ]
     });
 }
 
 function reset() {
-    $.ajax({
-        url: "rest/game/reset_score",
-        contentType: "text/plain",
-        method: 'POST',
-        success: [
-            function (data) {
-                console.log(data);
-            }
-        ],
-        error: [
-            function (jqXHR, text, error) {
-                console.log("ERROR");
-            }
-        ]
-    });
-
-    $.ajax({
-        url: "rest/game/reset_game",
-        contentType: "text/plain",
-        method: 'POST',
-        success: [
-            function (data) {
-                console.log(data);
-            }
-        ],
-        error: [
-            function (jqXHR, text, error) {
-                console.log("ERROR");
-            }
-        ]
-    });
+    resetScore();
+    resetGame();
 }
 
-function isCharGuessed(char) {
+function buttonClick(char) {
+    console.log(char + " clicked!");
     $.ajax({
-        url: "rest/game/is_char_guessed?ch=",
+        url: "rest/game/is_char_guessed?username=" + username + "&ch=" + char,
         contentType: "text/plain",
         method: 'GET',
         success: [
             function (data) {
-                return data;
+                console.log("already guessed: " + data);
+                if (data === 'false') {
+                    location.reload();
+                    guess(char);
+                    updateData();
+                    alertify.success(char + ' guessed!')
+                } else {
+                    alertify.error(char + ' has already been guessed!')
+                }
             }
         ],
         error: [
             function (jqXHR, text, error) {
-                console.log("ERROR isCharGuessed");
+                alertify.error("Error occurred pressing button " + char + "!");
             }
         ]
     });
-
 }
 
-function addBoucneOut(button) {
-    $(button).addClass("animated bounceOut")
-}
-
-function reset($elem) {
-    $elem.before($elem.clone(true));
-    var $newElem = $elem.prev();
-    $elem.remove();
-    return $newElem;
+function checkHighscore(isShowing) {
+    $.ajax({
+        url: "rest/game/is_highscore?username=" + username + "&password=" + password,
+        contentType: "text/plain",
+        method: 'GET',
+        success: [
+            function (data) {
+                if (data === 'true') {
+                    $.ajax({
+                        url: "rest/game/get_score?username=" + username,
+                        contentType: "text/plain",
+                        method: 'GET',
+                        success: [
+                            function (score_data) {
+                                $.ajax({
+                                    url: "rest/game/set_user_highscore?username=" + username + "&highscore=" + score_data,
+                                    contentType: "text/plain",
+                                    method: 'POST',
+                                    success: [
+                                        function (data) {
+                                            alertify.success("New high score: " + score_data + "!");
+                                        }
+                                    ],
+                                    error: [
+                                        function (jqXHR, text, error) {
+                                            alertify.error("Failed to set high score!");
+                                        }
+                                    ]
+                                });
+                            }
+                        ],
+                        error: [
+                            function (jqXHR, text, error) {
+                                console.log("ERROR: get_score")
+                            }
+                        ]
+                    });
+                }
+            }
+        ],
+        error: [
+            function (jqXHR, text, error) {
+                alertify.error("Failed to check highscore!");
+            }
+        ]
+    });
 }

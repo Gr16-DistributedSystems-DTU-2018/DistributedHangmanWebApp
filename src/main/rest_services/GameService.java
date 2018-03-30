@@ -251,7 +251,6 @@ public class GameService implements IGameService {
      */
     @POST
     @Path("/guess")
-    @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
     public Response guess(
             @QueryParam("username") String username,

@@ -1,4 +1,5 @@
 var username;
+var password;
 
 $(document).ready(function () {
 
@@ -6,6 +7,15 @@ $(document).ready(function () {
         if (sessionStorage.username) {
             username = sessionStorage.username;
             document.getElementById("username_fld").value = username;
+        } else {
+
+        }
+    }
+
+    if (typeof(Storage) !== "undefined") {
+        if (sessionStorage.password) {
+            password = sessionStorage.password
+            document.getElementById("password_fld").value = password;
         } else {
 
         }
@@ -32,6 +42,7 @@ $(document).ready(function () {
                     if (data === username + " logged in successfully.") {
                         console.log(data);
                         saveSessionUsername(username);
+                        saveSessionPassword(password);
                         window.location.replace("menu.html");
                     } else {
                         var usernameEle = $("#username_fld");
@@ -94,6 +105,10 @@ $(document).ready(function () {
 
 function saveSessionUsername(username) {
     sessionStorage.username = username
+}
+
+function saveSessionPassword(password) {
+    sessionStorage.password = password;
 }
 
 function reset($elem) {
