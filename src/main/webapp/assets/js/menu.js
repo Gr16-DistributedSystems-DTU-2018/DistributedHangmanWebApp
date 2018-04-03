@@ -69,7 +69,7 @@ function showLobby() {
         success: [
             function (data) {
                 for (var key in data) {
-                    scoreText += key + ' ─────────  ' + data[key] + '<br>';
+                    scoreText += key + ' ───────── ' + data[key] + ' <button id=username style="width: 25%; height: 8%">Battle</button><br>';
                 }
                 alertify.alert(scoreText);
             }
