@@ -69,7 +69,15 @@ function showLobby() {
         success: [
             function (data) {
                 for (var key in data) {
-                    scoreText += key + ' ───────── ' + data[key] + ' <button id=username style="width: 25%; height: 8%">Battle</button><br>';
+
+                    console.log("key: " + key + " : username: " + username)
+
+                    if (key === username) {
+                        scoreText += key + ' ───────── ' + data[key] + '<br>';
+                    } else {
+                        scoreText += key + ' ───────── ' + data[key] + ' <button id=username style="width: 25%; height: 8%">Battle</button><br>';
+                    }
+
                 }
                 alertify.alert(scoreText);
             }
@@ -118,7 +126,7 @@ function sendEmail() {
                 alertify.defaultValue("Message").prompt("<h2>Send Email</h2><br>Enter your message.", function (message, event4) {
                     event4.preventDefault();
                     $.ajax({
-                        url: "rest/game/send_email?username=" + username + "&password=" + password + "&subject=" + subject + "&msg=" + message + " --- Sendt via Gruppe 16 - DistributedHangman",
+                        url: "rest/game/send_email?username=" + username + "&password=" + password + "&subject=" + subject + "&msg=" + message + " --- Fra " + username + " --- Sendt via Gruppe 16 - DistributedHangman",
                         method: 'GET',
                         contentType: 'text/plain',
                         success: [
