@@ -60,10 +60,18 @@ button:hover {
 
 #border_container {
     width: 650px;
-    height: 935px;
+    height: 990px;
     margin: auto;
     position: relative;
     top: 50%;
     background: #3f51b5;
     border-radius: 25px;
+}
+
+p {
+    font-family: 'coiny', Fallback, sans-serif;
+    color: white;
+    font-size: large;
+    text-align: center;
+    alignment: center;
 }

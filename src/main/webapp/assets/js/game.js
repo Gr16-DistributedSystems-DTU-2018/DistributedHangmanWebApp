@@ -41,8 +41,7 @@ $(document).ready(function () {
     });
 
     $("#back_btn").click(function () {
-        reset();
-        window.location.replace("menu.html");
+        backBtn();
     });
 
 });
@@ -437,5 +436,14 @@ function checkHighscore(isShowing) {
                 alertify.error("Failed to check highscore!");
             }
         ]
+    });
+}
+
+function backBtn() {
+    alertify.confirm("<h2 style='color: black'>Back</h2><br>Are you sure you want to go back?<br><br>All your progress will be lost for this game!", function () {
+        reset();
+        window.location.replace("menu.html");
+    }, function () {
+
     });
 }

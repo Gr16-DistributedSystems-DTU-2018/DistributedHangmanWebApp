@@ -3,6 +3,8 @@ var password;
 
 $(document).ready(function () {
 
+    setUserAmount();
+
     if (typeof(Storage) !== "undefined") {
         if (sessionStorage.username) {
             username = sessionStorage.username;
@@ -102,6 +104,25 @@ $(document).ready(function () {
         });
     });
 });
+
+function setUserAmount() {
+    $.ajax({
+        url: "rest/game/get_current_user_amount",
+        contentType: "text/plain",
+        method: 'GET',
+        success: [
+            function (data) {
+                document.getElementById("users_online").innerHTML = "Users online: " + data;
+            }
+        ],
+        error: [
+            function (jqXHR, text, error) {
+                console.log("ERROR: rest/game/get_current_user_amount");
+                alertify.error("Could not fetch user amount!");
+            }
+        ]
+    });
+}
 
 function saveSessionUsername(username) {
     sessionStorage.username = username

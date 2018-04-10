@@ -2,6 +2,8 @@ var username;
 
 $(document).ready(function () {
 
+    setUserAmount();
+
     if (typeof(Storage) !== "undefined") {
         if (sessionStorage.username) {
             username = sessionStorage.username;
@@ -267,6 +269,25 @@ function resetAndPlay() {
         error: [
             function (jqXHR, text, error) {
                 console.log("ERROR: reset_score")
+            }
+        ]
+    });
+}
+
+function setUserAmount() {
+    $.ajax({
+        url: "rest/game/get_current_user_amount",
+        contentType: "text/plain",
+        method: 'GET',
+        success: [
+            function (data) {
+                document.getElementById("users_online").innerHTML = "Users online: " + data;
+            }
+        ],
+        error: [
+            function (jqXHR, text, error) {
+                console.log("ERROR: rest/game/get_current_user_amount");
+                alertify.error("Could not fetch user amount!");
             }
         ]
     });

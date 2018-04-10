@@ -237,7 +237,7 @@ public class GameService implements IGameService {
     public Response changeUserPassword(
             @QueryParam("username") String username,
             @QueryParam("oldPassword") String oldPassword,
-            @QueryParam("changePassword") String newPassword) throws RESTException {
+            @QueryParam("newPassword") String newPassword) throws RESTException {
         try {
             lobby.changeUserPassword(username, oldPassword, newPassword);
             return Response.ok().entity("Changed password for: " + username).build();
