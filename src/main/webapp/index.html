@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="assets/css/login.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.js"></script>
     <script src="assets/js/login.js"></script>
     <link rel="apple-touch-icon" sizes="57x57" href="assets/img/apple-icon-57x57.png">
@@ -21,6 +22,8 @@
     <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
     <link rel="manifest" href="assets/json/manifest.json">
+    <meta name="google-signin-client_id"
+          content="942002347061-njim6qiuohpkdj4qpufltgr4o041hpoc.apps.googleusercontent.com">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/img/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -42,7 +45,7 @@
         it a bug or a feature?", "Yes." - Behnia Farazan, Distributed Hangman Developer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         The Game Awards 2020 Nominee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nobel
         Peace Price 2017 Winner&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Half
-        Life 3 Confirmed - Gabe Newell"
+        Life 3 Confirmed" - Gabe Newell
     </marquee>
 
     <div class="container">
@@ -51,6 +54,11 @@
 
         <label><b>Password</b></label>
         <input id="password_fld" type="password" placeholder="Enter Password" required>
+
+        <div style="margin: 5px 5px 5px 5px">
+            <div class="g-signin2" data-onsuccess="onSignIn"
+                 style="text-align: center; alignment: center; margin: auto; width: 500px"></div>
+        </div>
 
         <div style="text-align: center">
             <button id="login_btn" type="submit">Login</button>
